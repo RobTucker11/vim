@@ -2,6 +2,7 @@
 " ==========================================================
 " Dependencies - Libraries/Applications outside of vim
 " ==========================================================
+"
 " Pep8 - http://pypi.python.org/pypi/pep8
 " Pyflakes
 " Ack
@@ -91,8 +92,10 @@ cmap w!! w !sudo tee % >/dev/null
 " ctrl-jklm  changes to that split
 map <c-j> <c-w>j
 map <c-k> <c-w>k
-map <c-l> <c-w>l
-map <c-h> <c-w>h
+"map <c-l> <c-w>l
+"map <c-h> <c-w>h
+imap <c-l> <Esc>:bn<CR>
+imap <c-h> <Esc>:bp<CR>
 
 " and lets make these all work in insert mode too ( <C-O> makes next cmd
 "  happen as if in command mode )
@@ -149,7 +152,7 @@ set pumheight=6             " Keep a small completion window
 
 " show a line at column 79
  if exists("&colorcolumn")
-    set colorcolumn=79
+    "set colorcolumn=79
 endif
 
 """ Moving Around/Editing
@@ -197,8 +200,9 @@ set laststatus=2            " Always show statusline, even if only 1 window.
 set statusline=%<%f\ (%{&ft})%=%-19(%3l,%02c%03V%)%{fugitive#statusline()}
 
 " displays tabs with :set list & displays when a line runs off-screen
-set listchars=tab:>-,eol:$,trail:-,precedes:<,extends:>
-set list
+"set listchars=tab:>-,eol:$,trail:-,precedes:<,extends:>
+"set listchars=
+"set list
 
 """ Searching and Patterns
 set ignorecase              " Default to using case insensitive searches,
@@ -207,7 +211,8 @@ set hlsearch                " Highlight searches by default.
 set incsearch               " Incrementally search while typing a /regex
 
 """" Display
-colorscheme vividchalk
+colorscheme railscasts
+
 
 " ==========================================================
 " Python
@@ -217,7 +222,7 @@ au FileType python set omnifunc=pythoncomplete#Complete
 au BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
 
 " Don't let pyflakes use the quickfix window
-let g:pyflakes_use_quickfix = 0
+"let g:pyflakes_use_quickfix = 0
 
 " turn of hlsearch and update pyflakes on enter
 au BufRead,BufNewFile *.py nnoremap <buffer><CR> :nohlsearch\|:call PressedEnter()<cr>
@@ -227,7 +232,7 @@ nnoremap <buffer><CR> :nohlsearch\|:call PressedEnter()<cr>
 function! PressedEnter()
     :nohlsearch
     if &filetype == 'python'
-        :PyflakesUpdate
+"        :PyflakesUpdate
     end
 endfunction
 
@@ -258,3 +263,7 @@ EOF
 if filereadable($VIRTUAL_ENV . '/.vimrc')
     source $VIRTUAL_ENV/.vimrc
 endif
+set undofile
+set undodir=~/.vimundo/
+set hidden
+set autowrite

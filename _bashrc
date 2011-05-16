@@ -133,10 +133,10 @@ fi
   }
 } >/dev/null 2>/dev/null
 
-venwrap=`type -P virtualenvwrapper_bashrc`
-if [ "$venwrap" != "" ]; then
-    source $venwrap
-fi
+#venwrap=`type -P virtualenvwrapper_bashrc`
+#if [ "$venwrap" != "" ]; then
+#    source $venwrap
+#fi
 
 # osx vim
 if [ -x "/Applications/MacVim.app/Contents/MacOS/Vim" ]; then
@@ -167,7 +167,8 @@ parse_svn_repository_root() {
 
 export DYLD_LIBRARY_PATH=/usr/local/mysql/lib/
 
-source /usr/local/bin/virtualenvwrapper.sh
+#source /usr/local/bin/virtualenvwrapper.sh
 
 # Add git and svn branch names
 export PS1="$PS1\$(parse_git_branch)\$(parse_svn_branch) "
+export PATH="/usr/local/bin:$PATH"
