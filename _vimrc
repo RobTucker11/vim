@@ -94,6 +94,8 @@ map <c-j> <c-w>j
 map <c-k> <c-w>k
 "map <c-l> <c-w>l
 "map <c-h> <c-w>h
+map <c-l> <Esc>:bn<CR>
+map <c-h> <Esc>:bp<CR>
 imap <c-l> <Esc>:bn<CR>
 imap <c-h> <Esc>:bp<CR>
 
@@ -263,7 +265,9 @@ EOF
 if filereadable($VIRTUAL_ENV . '/.vimrc')
     source $VIRTUAL_ENV/.vimrc
 endif
-set undofile
-set undodir=~/.vimundo/
+if v:version >= 703
+    set undofile
+    set undodir=~/.vimundo/
+endif
 set hidden
 set autowrite
